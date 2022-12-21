@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://wwww.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Add</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/}"  aria-disabled="true">Müşteri Listele</a>
+                </li>
+            </ul>
+            <form th:action="@{/list/all/search}" class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Search" name="query" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center"> Add New Customer</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" class="form" th:action="@{/save/customer}" method="post" th:object="${customer}">
+
+                    <input class="form-control" type="email" placeholder="Please enter email" id="customerEmail" name="customerEmail" th:field="*{customerEmail}">
+                    <p th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}" class="text-danger"></p>
+                    <br>
+                    <input placeholder="Please Enter name" type="text" class="form-control" id="customerName" name="customerName" th:field="*{customerName}">
+                    <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="text-danger"></p>
+                    <br>
+                    <input placeholder="Please Enter Surname" type="text" class="form-control" id = "customerSurname" name="customerSurname" th:field="*{customerSurname}">
+                    <br>
+                <button class="btn btn-primary" type="submit"> Submit</button>
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>

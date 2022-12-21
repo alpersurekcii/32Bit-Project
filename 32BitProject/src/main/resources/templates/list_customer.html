@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>List Customer</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link  active" th:href="@{/save/customer}"  aria-disabled="true">Müşteri Ekle</a>
+                </li>
+            </ul>
+            <form th:action="@{/list/all/search}" class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Search" name="query" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<table class="table table-stripped table-hover table-bordered">
+    <thead class="table-dark">
+    <th style="width: 10%">#</th>
+    <th style="width: 20%">Customer Name</th>
+    <th style="width: 30%">Customer Surname</th>
+
+    <th style="width: 20%">Actions</th>
+
+    </thead>
+    <tbody>
+    <tr th:each="customer, customerCount : ${customers}">
+        <td th:text="${customerCount.count}">1</td>
+        <td th:text="${customer.customerName}"></td>
+        <td th:text="${customer.customerSurname}"></td>
+
+        <td>
+
+            <a class="btn btn-info" th:href="@{/customer/{id}(id=${customer.id})}">View</a>
+            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${customer.id})}">Delete</a>
+        </td>
+
+    </tr>
+
+    </tbody>
+
+
+</table>
+</body>
+</html>
