@@ -46,7 +46,7 @@ public class WebSpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
       http .authorizeHttpRequests(authorize -> {
                     try {
-                        authorize.requestMatchers("/register").permitAll()
+                        authorize.requestMatchers("/register").denyAll()
                                 .requestMatchers("/api/**").permitAll()
                                 .requestMatchers("/ws/**").permitAll()
                                 .requestMatchers("/ws").permitAll()
