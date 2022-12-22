@@ -25,7 +25,67 @@
 				},
 				"description": "Veritabanındaki bütün müşterileri listeler"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "List Customers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Dec 2022 12:04:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"successful\": true,\n    \"code\": \"SUCCESS\",\n    \"message\": \"Müşteriler\",\n    \"result\": [\n        {\n            \"id\": 5,\n            \"customerName\": \"Alper\",\n            \"customerEmail\": \"surekcialper@gmail.com\",\n            \"customerSurname\": \"Sürekçi\"\n        },\n        {\n            \"id\": 9,\n            \"customerName\": \"deneme\",\n            \"customerEmail\": \"deneme\",\n            \"customerSurname\": \"deneme\"\n        },\n        {\n            \"id\": 10,\n            \"customerName\": \"soap\",\n            \"customerEmail\": \"soap@gmail.com\",\n            \"customerSurname\": \"deneme\"\n        },\n        {\n            \"id\": 12,\n            \"customerName\": \"kadir\",\n            \"customerEmail\": \"kadir@gmail.com\",\n            \"customerSurname\": \"surekci\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Find Customer By id",
@@ -47,7 +107,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Find Customer By id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"5"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Dec 2022 12:05:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"successful\": true,\n    \"code\": \"SUCCESS\",\n    \"message\": \"Müşteri bulundu\",\n    \"result\": [\n        {\n            \"id\": 5,\n            \"customerName\": \"Alper\",\n            \"customerEmail\": \"surekcialper@gmail.com\",\n            \"customerSurname\": \"Sürekçi\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Customer Delete By Id",
@@ -69,7 +190,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Customer Delete By Id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"9"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Dec 2022 12:05:58 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"successful\": true,\n    \"code\": \"SUCCESS\",\n    \"message\": \"Müşteri başarıyla silindi\",\n    \"result\": [\n        {\n            \"id\": 9,\n            \"customerName\": \"deneme\",\n            \"customerEmail\": \"deneme\",\n            \"customerSurname\": \"deneme\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Save Customer",
@@ -104,7 +286,81 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Save Customer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers?customerName=gökay&customerSurname=surekci&customerEmail=gokay@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "customerName",
+									"value": "gökay"
+								},
+								{
+									"key": "customerSurname",
+									"value": "surekci"
+								},
+								{
+									"key": "customerEmail",
+									"value": "gokay@gmail.com"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Dec 2022 12:06:19 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"successful\": true,\n    \"code\": \"SUCCESS\",\n    \"message\": \"Müşteri eklendi.\",\n    \"result\": [\n        {\n            \"id\": null,\n            \"customerName\": \"gökay\",\n            \"customerEmail\": \"gokay@gmail.com\",\n            \"customerSurname\": \"surekci\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Search Customer",
@@ -132,7 +388,74 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Search Customer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customers/search?query=al",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "al"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Dec 2022 12:06:27 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"successful\": true,\n    \"code\": \"SUCCESS\",\n    \"message\": \"Arama basarili\",\n    \"result\": [\n        {\n            \"id\": 5,\n            \"customerName\": \"Alper\",\n            \"customerEmail\": \"surekcialper@gmail.com\",\n            \"customerSurname\": \"Sürekçi\"\n        }\n    ]\n}"
+				}
+			]
 		}
 	]
 }
