@@ -44,7 +44,7 @@ public class CustomerController {
         }
         ReturnModel returnModel = customerService.addCustomer(customerDto);
         log.info(returnModel);
-        return "list_customer";
+        return "redirect:/";
     }
 
     //List all customer

@@ -6,6 +6,7 @@ import com.alpersurekci.project.customers.*;
 import com.alpersurekci.project.dto.CustomerDto;
 import org.springframework.beans.BeanUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -19,10 +20,11 @@ import java.util.List;
 public class CustomerEndpoint {
   private static final String NAMESPACE_URI = "http://localhost:8080/soap/customers";
 
-    public CustomerEndpoint(CustomerService customerService) {
+   /* public CustomerEndpoint(CustomerService customerService) {
         this.customerService = customerService;
-    }
+    }*/
 
+    @Autowired
     CustomerService customerService;
     //get customer by id
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCustomerByIdRequest")
