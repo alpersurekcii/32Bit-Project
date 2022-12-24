@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setName("ADMIN");
         user.addRole(roleEntity);
+        user.setUserID(5L);
         roleRepository.save(roleEntity);
         userRepository.save(user);
     }

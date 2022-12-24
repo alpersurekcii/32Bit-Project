@@ -33,11 +33,11 @@
     <h1 style="color:rgb(2, 52, 102)">Login Page</h1>
 </div>
 
-<form class="form-horizontal" method="post" th:action="@{/login}" th:name="login">
-    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-    <input autofocus class="form-control mb-4" id="username" name="username" placeholder="Username" required
+<form class="form-horizontal" method="post" th:action="@{/login}" th:object="${user}" th:name="login">
+
+    <input autofocus class="form-control mb-4" id="username" th:field="*{userName}" name="username" placeholder="Username" required
            type="text"/>
-    <input class="form-control mb-4" id="password" name="password" placeholder="password" required type="password"/>
+    <input class="form-control mb-4" id="password" name="password" th:field="*{password}" placeholder="password" required type="password"/>
     <div class="text-center">
         <button class=" mt-2 btn btn-primary">Sign In</button>
     </div>

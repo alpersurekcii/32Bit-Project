@@ -1,16 +1,27 @@
 package com.alpersurekci.project.Controller;
 
 import com.alpersurekci.project.ExternalService.Service.UserService;
+import com.alpersurekci.project.Security.jwt.JwtResponse;
+import com.alpersurekci.project.Security.jwt.JwtUtils;
+import com.alpersurekci.project.dto.CustomUserDetails;
 import com.alpersurekci.project.dto.UserDto;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Controller
@@ -19,9 +30,32 @@ public class UserController {
     @Autowired
     UserService service;
 
+    @Autowired
+    JwtUtils jwtUtils;
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @PostMapping("/login")
+    public String authenticateUser(@Valid @ModelAttribute("user") UserDto userDto) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userDto.getUserName(), userDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+
+        return "redirect:/";
+    }
+
 
     @GetMapping("/login")
-    public String getLogin(){
+    public String getLogin(Model model){
+        model.addAttribute("user", new UserDto());
         return "login";
     }
 

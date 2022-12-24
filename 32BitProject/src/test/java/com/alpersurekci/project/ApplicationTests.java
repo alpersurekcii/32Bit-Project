@@ -105,20 +105,5 @@ class ApplicationTests {
 		assertThat(savedCustomer.getResult()).isNotNull();
 
 	}
-/*
-	@DisplayName("JUnit test for deleteCustomerById method")
-	@Test
-	public void givenEmployeeId_whenDeleteEmployee_thenNothing(){
-		// given - precondition or setup
-		long customerID = 1;
 
-		willDoNothing().given(customerRepository).deleteById(1L);
-
-		// when -  action or the behaviour that we are going test
-	ReturnModel returnModel = customerService.deleteCustomerById(1L);
-
-		// then - verify the output
-		assertThat(returnModel.getResult()).isNotNull();
-	}
-*/
 }

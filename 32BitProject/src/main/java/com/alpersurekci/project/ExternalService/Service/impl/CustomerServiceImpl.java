@@ -7,6 +7,11 @@ import com.alpersurekci.project.ExternalService.Service.CustomerService;
 import com.alpersurekci.project.Model.ReturnModel;
 import com.alpersurekci.project.dto.CustomerDto;
 import com.alpersurekci.project.mapper.CustomerMapper;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Log4j2
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -36,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
             returnModel.setResult(customerDtos);
             returnModel.setSuccessful(false);
             returnModel.setCode("FAILED");
+            log.info("Musteri kayitli");
             return returnModel;
         }else{
        CustomerEntity  customer=  customerRepository.save(customerEntity); //save customer to db
@@ -83,6 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         }
         else{
+            log.info("musteri silinemedi");
              return ReturnModel.builder()
                     .message("Müşteri silinemedi")
                     .successful(false)
@@ -109,6 +116,7 @@ public class CustomerServiceImpl implements CustomerService {
                     .build();
         }
         else{
+            log.info("musteri bulunamadi");
             return ReturnModel
                     .builder()
                     .code("")
@@ -129,6 +137,17 @@ public class CustomerServiceImpl implements CustomerService {
          returnModel.setSuccessful(true);
          returnModel.setCode("SUCCESS");
          return returnModel;
+    }
+
+
+
+    @Override
+    public Page<CustomerEntity> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo-1, pageSize, sort);
+        return this.customerRepository.findAll(pageable);
     }
 
 
