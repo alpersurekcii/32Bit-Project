@@ -6,6 +6,7 @@ import com.alpersurekci.project.Model.ReturnModel;
 import com.alpersurekci.project.dto.CustomerDto;
 
 
+import com.alpersurekci.project.mapper.CustomerMapper;
 import jakarta.jws.WebParam;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Log4j2
@@ -57,7 +59,7 @@ public class CustomerController {
         int pageSize = 5;
 
         Page < CustomerEntity > page = customerService.findPaginated(pageNo, pageSize, sortField, sortDir);
-        List < CustomerEntity > listEmployees = page.getContent();
+        List < CustomerDto > listEmployees = page.getContent().stream().map(CustomerMapper::entity2Dto).collect(Collectors.toList());
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());

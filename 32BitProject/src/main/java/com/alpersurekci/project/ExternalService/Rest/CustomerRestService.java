@@ -8,7 +8,7 @@ public interface CustomerRestService {
     //get customer by id
     ReturnModel getCustomerById(Long id);
     //list customers
-    ReturnModel getCustomers();
+    CustomerResponse getCustomers(int pageNo,int pageSize,String sortBy,String sortDir);
     //add customer
     ReturnModel addCustomer(CustomerDto customerDto);
     //delete customer by id
