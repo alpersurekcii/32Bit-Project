@@ -1,0 +1,14 @@
+com.alpersurekci.project
+com.alpersurekci.project.Controller
+com.alpersurekci.project.customers
+com.alpersurekci.project.dto
+com.alpersurekci.project.ExternalService.DAO.Entity
+com.alpersurekci.project.ExternalService.DAO.Repository
+com.alpersurekci.project.ExternalService.Rest
+com.alpersurekci.project.ExternalService.Rest.impl
+com.alpersurekci.project.ExternalService.Service
+com.alpersurekci.project.ExternalService.Service.impl
+com.alpersurekci.project.ExternalService.SOAP
+com.alpersurekci.project.mapper
+com.alpersurekci.project.Model
+com.alpersurekci.project.Security

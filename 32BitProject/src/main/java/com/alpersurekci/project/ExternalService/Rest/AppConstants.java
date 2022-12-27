@@ -1,5 +1,9 @@
 package com.alpersurekci.project.ExternalService.Rest;
 
+/**
+ * Pagination ve sorting işlemi için default ayarlar bu sınıfta uygulanmamıştır.
+ * @author Alper Sürekçi
+ */
 public class AppConstants {
     public static final String DEFAULT_PAGE_NUMBER = "1";
     public  static final String DEFAULT_PAGE_SIZE = "5";

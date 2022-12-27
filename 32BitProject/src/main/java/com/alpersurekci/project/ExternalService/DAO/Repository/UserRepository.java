@@ -1,4 +1,9 @@
 package com.alpersurekci.project.ExternalService.DAO.Repository;
+/**
+ * User için oluşturulan repodur.
+ * User ile ilgili database işlemleri burada gerçekleştirilir.
+ * @author Alper Sürekçi
+ */
 
 import com.alpersurekci.project.ExternalService.DAO.Entity.UserEntity;
 import com.alpersurekci.project.dto.UserDto;

@@ -1,47 +1,71 @@
 package com.alpersurekci.project.dto;
+/**
+ * Spring Security de kullanılan giriş yapan kullanıcı bilgilerini içermektedir.
+ * @author Alper Sürekçi
+ */
 
+import com.alpersurekci.project.ExternalService.DAO.Entity.CustomerEntity;
 import com.alpersurekci.project.ExternalService.DAO.Entity.RoleEntity;
 import com.alpersurekci.project.ExternalService.DAO.Entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
-    private final UserEntity userEntity;
+  private Long id;
 
-    public CustomUserDetails(UserEntity userEntity) {
-        this.userEntity = userEntity;
+  private String username;
+
+  @JsonIgnore
+  private String password;
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public CustomUserDetails(Long id, String username, String password,
+                           Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+
+
+    public static CustomUserDetails build(UserEntity user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+
+        return new CustomUserDetails(
+                user.getUserID(),
+                user.getUserName(),
+                user.getPassword(),
+                authorities);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-
-
-        Set<RoleEntity> roles = userEntity.getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-        for (RoleEntity role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-
         return authorities;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+
+
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUserName();
+        return username;
     }
 
     @Override
@@ -64,12 +88,13 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
-
-    public String getFullName() {
-        return userEntity.getUserName();
-    }
-
-    public Long getID() {
-        return userEntity.getUserID();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        CustomUserDetails user = (CustomUserDetails) o;
+        return Objects.equals(id, user.id);
     }
 }

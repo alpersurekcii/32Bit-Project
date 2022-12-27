@@ -7,6 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Müşteri entitysinin bulunduğu sınıftır.
+ * @author Alper Sürekçi
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,13 +18,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="customers")
 public class CustomerEntity {
+    /**
+     * Müşteri id'si
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Customer name not empty")
+
+    /**
+     * Müşteri ismi
+     */
     private String customerName;
-    @NotEmpty(message = "Customer surname not empty")
+    /**
+     * Müşteri soyismi
+     */
     private String customerSurname;
-    @NotEmpty(message = "Customer email not empty")
+    /**
+     * Müşteri emaili
+     */
     private String customerEmail;
 }

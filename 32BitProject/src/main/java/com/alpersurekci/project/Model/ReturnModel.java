@@ -1,4 +1,9 @@
 package com.alpersurekci.project.Model;
+/**
+ * Return model sınıfı ReturnModel objesi özellikleri bulundurmaktadır.
+ * Projede bu model geri dönüş tipi olarak istenilmiştir.
+ * @author Alper Sürekçi
+ */
 
 import com.alpersurekci.project.dto.CustomerDto;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,8 @@
 package com.alpersurekci.project.ExternalService.SOAP;
+/**
+ * Configuration SOAP service
+ * @author Alper Sürekçi
+ */
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;

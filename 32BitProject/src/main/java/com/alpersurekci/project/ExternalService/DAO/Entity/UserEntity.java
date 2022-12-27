@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * User entitynin bulunduğu sınıftır.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +26,9 @@ public class UserEntity {
     private String userName;
 
     private String password;
-
+    /**
+     * Role tablosu ile bağlantı
+     */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -35,5 +40,6 @@ public class UserEntity {
     public void addRole(RoleEntity role) {
         this.roles.add(role);
     }
+
 
 }

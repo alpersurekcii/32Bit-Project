@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * User için role entitynin bulunduğu sınıftır.
+ * @author Alper Sürekçi
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

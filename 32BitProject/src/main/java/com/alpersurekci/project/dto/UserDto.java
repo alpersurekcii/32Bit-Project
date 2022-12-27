@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Kullanıcı dto'sunun olduğu sınıftır.
+ * @author Alper Sürekçi
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

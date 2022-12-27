@@ -1,4 +1,14 @@
 package com.alpersurekci.project.ExternalService.Service.impl;
+/**
+ * Bu sınıfta müşteri ile ilgili olan işlemler veri tabanı bağlantılarıyla
+ * gerçekleştirilmiştir. Bu işlemler :
+ * Müşteriyi veri tabanına ekleme
+ * Müşteriyi id'sine göre veri tabanından silme
+ * Müşteriyi id'sine göre veri tabanından çağırma
+ * Müşterileri listeleme
+ * Müşterileri veri tabanında arama'dır.
+ * @author Alper Sürekçi
+ */
 
 import com.alpersurekci.project.ExternalService.DAO.Entity.CustomerEntity;
 import com.alpersurekci.project.ExternalService.DAO.Entity.UserEntity;
@@ -29,6 +39,12 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
 
     }
+
+    /**
+     * Müşteriyi veri tabanına kaydetme işlemi yapılmıştır.
+     * @param customerDto Müşteri bilgileri
+     * @return
+     */
     //add customer
     @Override
     public ReturnModel addCustomer(CustomerDto customerDto) {
@@ -37,11 +53,11 @@ public class CustomerServiceImpl implements CustomerService {
         List<CustomerDto> customerDtos = new ArrayList<>();
         Optional<CustomerEntity> customerEntity1 = customerRepository.findByEmail(customerEntity.getCustomerEmail());
         if(customerEntity1.isPresent()){
-            returnModel.setMessage("Kullanıcı kayıtlı");
+            returnModel.setMessage("customer registered");
             returnModel.setResult(customerDtos);
             returnModel.setSuccessful(false);
             returnModel.setCode("FAILED");
-            log.info("Musteri kayitli");
+            log.info("customer registered");
             return returnModel;
         }else{
        CustomerEntity  customer=  customerRepository.save(customerEntity); //save customer to db
@@ -50,29 +66,41 @@ public class CustomerServiceImpl implements CustomerService {
         customerDtos.add(customerDto);
 
         if(customer.equals(customerEntity)){
-            returnModel.setMessage("Müşteri eklendi.");
+            returnModel.setMessage("Customer added successfully");
             returnModel.setSuccessful(true);
             returnModel.setResult(customerDtos);
             returnModel.setCode("SUCCESS");
-
+            log.info("Customer added successfully");
         }
         else{
             returnModel.setSuccessful(false);
-            returnModel.setMessage("Müşteri eklenemedi");
+            returnModel.setMessage("Customer didn't add");
             returnModel.setResult(customerDtos);
             returnModel.setCode("FAILED");
+            log.info("Customer didn't add");
         }
         return returnModel;
     }}
 
+    /**
+     * Müşterileri listeleme işlemi yapılmıştır.
+     * @return
+     */
     //list all customers
     @Override
     public ReturnModel getCustomers() {
        List<CustomerEntity> customerEntity = customerRepository.findAll();
        List<CustomerDto> customerDtos= customerEntity.stream().map(CustomerMapper :: entity2Dto).collect(Collectors.toList());
-        return ReturnModel.builder().result(customerDtos).code("SUCCESS").message("Müşteriler").successful(true).build();
+       log.info("List all customers");
+        return ReturnModel.builder().result(customerDtos).code("SUCCESS").message("Customers").successful(true).build();
     }
 
+    /**
+     * Müşteri id'sine göre müşteriyi veritabanından
+     * silme işlemi yapılmıştır.
+     * @param id Müşteri id'si
+     * @return
+     */
     //delete customer by id
     @Override
     public ReturnModel deleteCustomerById(Long id) {
@@ -80,8 +108,9 @@ public class CustomerServiceImpl implements CustomerService {
         if(customerEntity.isPresent()){
 
             customerRepository.deleteById(id); // delete customer
-               return ReturnModel.builder()
-                        .message("Müşteri başarıyla silindi")
+            log.info("Customer deleted successfully");
+            return ReturnModel.builder()
+                        .message("Customer deleted successfully")
                         .successful(true)
                         .code("SUCCESS")
                         .result(customerEntity.stream().map(CustomerMapper::entity2Dto).collect(Collectors.toList()))
@@ -89,9 +118,9 @@ public class CustomerServiceImpl implements CustomerService {
 
         }
         else{
-            log.info("musteri silinemedi");
+            log.info("customer could not be deleted");
              return ReturnModel.builder()
-                    .message("Müşteri silinemedi")
+                    .message("customer could not be deleted")
                     .successful(false)
                     .code("FAILED")
                     .result(customerEntity.stream().map(CustomerMapper::entity2Dto).collect(Collectors.toList()))
@@ -101,46 +130,66 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+    /**
+     * Müşteri id'sine göre müşteriyi veri tabanından
+     * çekme işlemi yapılmıştır.
+     * @param id Müşteri id'si
+     * @return
+     */
     //get customer by id
     @Override
     public ReturnModel getCustomerById(Long id) {
          Optional<CustomerEntity> customerEntity = customerRepository.findById(id); //find customer
         if(customerEntity.isPresent()) {
+            log.info("Customer found successfully");
             return ReturnModel
                     .builder()
-                    .code("")
+
                     .result(customerEntity.stream().map(CustomerMapper::entity2Dto).collect(Collectors.toList()))
                     .successful(true)
-                    .message("Müşteri bulundu")
+                    .message("Customer found successfully")
                     .code("SUCCESS")
                     .build();
         }
         else{
-            log.info("musteri bulunamadi");
+            log.info("Customer not found");
             return ReturnModel
                     .builder()
-                    .code("")
+                    .code("FAILED")
                     .result(customerEntity.stream().map(CustomerMapper::entity2Dto).collect(Collectors.toList()))
                     .successful(false)
-                    .message("Müşteri bulunamadı")
+                    .message("Customer not found")
                     .build();
         }
     }
 
+    /**
+     * Müşteriyi veri tabanında arama işlemi yapılmıştır.
+     * @param query aranacak kelime
+     * @return
+     */
     //search customers
     @Override
     public ReturnModel searchCustomer(String query) {
          List<CustomerEntity> customer = customerRepository.searchCustomer(query);//search db
+        log.info("Customers found");
          ReturnModel returnModel = new ReturnModel();
          returnModel.setResult((customer.stream().map(CustomerMapper::entity2Dto).collect(Collectors.toList())));
-         returnModel.setMessage("Arama basarili");
+         returnModel.setMessage("Searched Successfull");
          returnModel.setSuccessful(true);
          returnModel.setCode("SUCCESS");
          return returnModel;
     }
 
 
-
+    /**
+     * Müşterileri paginating ve sortinge göre listeleme işlemi yapılmıştır.
+     * @param pageNo sayfa numarası
+     * @param pageSize sayfada bulunacak müşteri sayısı
+     * @param sortField sayfada sortlanacak alan
+     * @param sortDirection sortlanma metodu
+     * @return
+     */
     @Override
     public Page<CustomerEntity> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :

@@ -1,14 +1,12 @@
 package com.alpersurekci.project.Controller;
 
+import com.alpersurekci.project.ExternalService.DAO.Entity.UserEntity;
 import com.alpersurekci.project.ExternalService.Service.UserService;
-import com.alpersurekci.project.Security.jwt.JwtResponse;
-import com.alpersurekci.project.Security.jwt.JwtUtils;
-import com.alpersurekci.project.dto.CustomUserDetails;
+import com.alpersurekci.project.Security.JwtUtils;
 import com.alpersurekci.project.dto.UserDto;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,9 +18,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * user controller
+ * User login ve registerın bulunduğu sınıftır.
+ * @author Alper Sürekçi
+ */
 @Log4j2
 @Controller
 public class UserController {
@@ -38,16 +38,17 @@ public class UserController {
     @PostMapping("/login")
     public String authenticateUser(@Valid @ModelAttribute("user") UserDto userDto) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userDto.getUserName(), userDto.getPassword()));
+      Authentication authentication = authenticationManager.authenticate(
+              new UsernamePasswordAuthenticationToken(
+                      userDto.getUserName(),
+                      userDto.getPassword()
+              ));
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+              String token = jwtUtils.generateJwtToken(authentication);
+        System.out.println(userDto);
+        System.out.println(token);
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
 
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
 
         return "redirect:/";
     }
@@ -59,6 +60,11 @@ public class UserController {
         return "login";
     }
 
+    /**
+     * User için get register metodu
+     * @param model model objemiz
+     * @return
+     */
     //Register page
     @GetMapping("/register")
     public String getUserRegister(Model model){
@@ -66,12 +72,18 @@ public class UserController {
         return "register";
     }
 
+    /**
+     * User register için post metodu
+     * @param userDto kullanıcı bilgileri
+     * @param bindingResult
+     * @return
+     */
     //Register post
     @PostMapping("/register")
     public String postUserRegister(@Valid @ModelAttribute("user_register")UserDto userDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
-            log.info("userRegister metodunda hata");
+            log.info("userRegister method failed");
             return "fail";
         }
         log.info(userDto);

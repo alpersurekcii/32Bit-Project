@@ -1,4 +1,9 @@
 package com.alpersurekci.project.ExternalService.Service.impl;
+/**
+ * User için servis sınıfıdır ve veri tabanı işlemleri
+ * burada gerçekleştirilir.
+ * @author Alper Sürekçi
+ */
 
 import com.alpersurekci.project.ExternalService.DAO.Entity.RoleEntity;
 import com.alpersurekci.project.ExternalService.DAO.Entity.UserEntity;
@@ -23,6 +28,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
+    /**
+     * User register işlemi yapılmıştır.
+     * @param userDto user bilgileri
+     */
 
     @Override
     public void saveUser(UserDto userDto) {
