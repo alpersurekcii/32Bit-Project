@@ -1,7 +1,6 @@
 # 32Bit-Project 
-Java Spring Boot Customer System. 
-In the project, the user can add customers, delete customers,
-list customers, call customers by customer ID and search for customers.
+The project gives users the ability to add and delete  customers as well as list customers. 
+In addition, users can  get customer with the customers ID. 
 
 ## Dependency
 Spring Web, Spring Data JPA, Spring Security 
