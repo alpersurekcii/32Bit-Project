@@ -6,8 +6,8 @@ list customers, call customers by customer ID and search for customers.
 ## Dependency
 Spring Web, Spring Data JPA, Spring Security 
 Thymeleaf, Lombok, Validation
-MySQL Database, Spring Boot Actuator, JSON Web Token
-Swagger.
+MySQL Database, Spring Boot Actuator, JSON Web Token,
+Spring Rest, Spring Soap, Swagger.
 
 ## DEMO
  
