@@ -54,11 +54,11 @@ Swagger.
 - Spring Security
 
 
-#### Installation
+## Installation
 1. Clone the repo
 ```
 git clone https://github.com/alpersurekcii/32Bit-Project.git
 ```
 
-#### Contact
+## Contact
 surekcialper@gmail.com
