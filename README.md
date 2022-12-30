@@ -22,7 +22,7 @@ Spring Rest, Spring Soap, Swagger.
 
 <p align="center">
     Save Customer </br> </br>
-    <img src="https://github.com/alpersurekcii/32Bit-Project/blob/main/images/save.png" alt="Material Bread logo">
+    <img src="https://github.com/alpersurekcii/32Bit-Project/blob/main/images/save.JPG" alt="Material Bread logo">
 </p>
 
  
